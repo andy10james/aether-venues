@@ -92,6 +92,20 @@
     font-size: .95em;
 }
 
+.venue-card__hiring {
+    margin: 15px 15px 15px 0;
+    float: right;
+    background-color: red;
+    color: white;
+    border-radius: 3px;
+    font-size: .9rem;
+    text-shadow: none;
+    padding: 3px 6px 5px;
+    line-height: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
 .venue-card__time .venue-card__start {
     display: inline-block;
 

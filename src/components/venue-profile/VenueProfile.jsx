@@ -1,4 +1,5 @@
 import React from "react";
+import { isMobile } from "react-device-detect";
 import { Time } from "../time/Time";
 import { favouritesService } from "../../services/favouritesService";
 import { visitedService } from "../../services/visitedService";
@@ -90,10 +91,24 @@ class VenueProfile extends React.Component {
                         </div>
                     )}
 
-                    <div className="venue-profile__heading">
+                    <div className={isMobile ? "venue-profile__heading-mobile" : "venue-profile__heading"}>
+                        <div className={isMobile && (this.props.venue.isNew() || this.props.venue.hiring) ? "venue-profile__tags-mobile" : "venue-profile__tags"}>
+
+                            { this.props.venue.isNew() ?
+                                <div className={isMobile ? "venue-profile__new-mobile" : "venue-profile__new"}>New!</div> :
+                                null
+                            }
+
+                            { this.props.venue.hiring ?
+                                <div className={isMobile ? "venue-profile__hiring-mobile" : "venue-profile__hiring"}>Hiring!</div> :
+                                null
+                            }
+                        </div>
                         <h2>
                             { this.props.venue.name }
                         </h2>
+
+
                     </div>
 
                     <p className="venue-profile__location">

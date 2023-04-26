@@ -25,6 +25,9 @@ class Venue {
         return this.added && new Date(this.added) > newIfAfter
     }
 
+    isHiring() {
+        return this.hiring
+    }
 }
 
 export { Venue };

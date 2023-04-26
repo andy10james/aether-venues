@@ -65,6 +65,8 @@ button.venue-profile__visited-button--visited {
     box-sizing: border-box;
     max-height: 50vh;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .venue-profile__notice {
@@ -78,6 +80,11 @@ button.venue-profile__visited-button--visited {
 .venue-profile__heading {
     display: flex;
     align-items: center;
+}
+
+.venue-profile__heading-mobile {
+    display: flex;
+    flex-direction: column;
 }
 
 .venue-profile__heading h2 {
@@ -159,7 +166,7 @@ button.venue-profile__visited-button--visited {
     padding: 10px 15px;
     border-radius: 5px;
     background-color: #1A1A1A;
-    margin-top: 20px;     
+    margin-top: 20px;
 }
 
 .venue-profile__exceptions table {
@@ -188,4 +195,76 @@ button.venue-profile__visited-button--visited {
     margin-top: 5px;
     width: fit-content;
     font-size: 0.9em;
+}
+
+.venue-profile__tags-mobile {
+    display: flex;
+    flex-direction: row;
+    order: -1;
+}
+
+.venue-profile__tags {
+    display: flex;
+    justify-items: top;
+    flex-direction: row;
+    /* flex: 1; */
+}
+
+.venue-profile__new {
+    margin-right: 15px;
+    background-color: darkorange;
+    color: white;
+    border-radius: 3px;
+    font-size: 1.3rem;
+    text-shadow: none;
+    padding: 3px 6px 5px;
+    line-height: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    max-width: min-content;
+}
+
+.venue-profile__new-mobile {
+    /* float: left; */
+    /* margin: 0 15px 15px 0; */
+    background-color: darkorange;
+    color: white;
+    border-radius: 3px;
+    font-size: .9rem;
+    text-shadow: none;
+    padding: 3px 6px 5px;
+    line-height: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    max-width: min-content;
+}
+
+.venue-profile__hiring {
+    float: right;
+    margin: 0;
+    background-color: red;
+    color: white;
+    border-radius: 3px;
+    font-size: .9rem;
+    text-shadow: none;
+    padding: 3px 6px 5px;
+    line-height: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    max-width: min-content;
+}
+
+.venue-profile__hiring-mobile {
+    /* float: left; */
+    /* margin: 0 15px 15px 0; */
+    background-color: red;
+    color: white;
+    border-radius: 3px;
+    font-size: .9rem;
+    text-shadow: none;
+    padding: 3px 6px 5px;
+    line-height: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    max-width: min-content;
 }
