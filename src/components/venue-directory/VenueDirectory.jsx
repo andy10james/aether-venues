@@ -9,13 +9,13 @@ import { VenueList } from "../venue-list/VenueList";
 import days from "../../consts/days.json";
 import "./venue-directory.css"
 
-const isLoadedButNoResult = (venues) => 
+const isLoadedButNoResult = (venues) =>
   venues !== undefined && venues !== null && venues.length === 0;
 
 const isLoadingOrLoadedWithResults = (venues) => !isLoadedButNoResult(venues);
 
 export function VenueDirectory(props) {
-  
+
   let { listView } = props;
 
   // filter states
@@ -31,6 +31,7 @@ export function VenueDirectory(props) {
   const [ open, setOpen ] = useState(null);
   const [ newest, setNewest ] = useState(null);
   const [ scheduled, setScheduled ] = useState(null);
+  const [ hiring, setHiring ] = useState(null);
 
   useEffect(_ => {
     (async () => {
@@ -41,6 +42,7 @@ export function VenueDirectory(props) {
       setOpen(openVenues);
       const scheduledVenues = await venueService.getVenueSchedule();
       setScheduled(scheduledVenues);
+      setHiring(venues.filter(v => v.isHiring()));
     })();
   }, [ ]);
 
@@ -65,14 +67,15 @@ export function VenueDirectory(props) {
       currentVenues = worldFilter.filter(currentVenues);
     for (let filter of typeFilters)
       currentVenues = filter.filter(currentVenues);
-    for (let filter of featureFilters) 
+    for (let filter of featureFilters)
       currentVenues = filter.filter(currentVenues);
     return currentVenues;
   }
 
-  let filteredFavorites, 
+  let filteredFavorites,
       filteredOpen,
       filteredNewest,
+      filteredHiring,
       filteredUnscheduled,
       scheduledVenuesRender;
 
@@ -82,6 +85,10 @@ export function VenueDirectory(props) {
 
   if (open !== null) {
     filteredOpen = filter(open);
+  }
+
+  if (hiring !== null) {
+    filteredHiring = filter(hiring);
   }
 
   if (newest !== null) {
@@ -104,7 +111,7 @@ export function VenueDirectory(props) {
       <div className="aether-venues__day" key={i}>
         <details open>
           <summary><h2>{currentDay === i ? "Today" : currentDay === i - 1 ? "Tomorrow" : days[i]}</h2></summary>
-          { listView 
+          { listView
             ? <VenueList venues={filteredScheduled} />
             : <VenueStrip venues={filteredScheduled} /> }
         </details>
@@ -127,24 +134,24 @@ export function VenueDirectory(props) {
           We're sowwy. 😞 <strong>We didn't find any venues for that search or combination of tags.</strong> <br/>We're indexing hundreds of venues per month! So, check back later or ask the community in <a href="https://discord.gg/gTP65VYcMj">our discord</a>!
         </div>
     }
-    
+
     { /* Favorites */ }
-    { isLoadingOrLoadedWithResults(filteredFavorites) && 
+    { isLoadingOrLoadedWithResults(filteredFavorites) &&
     <div className="aether-venues__venues aether-venues__favourite-venues">
       <details open>
         <summary><h2>Favorites</h2></summary>
-        { listView 
+        { listView
           ? <VenueList venues={filteredFavorites} />
           : <VenueStrip venues={filteredFavorites} /> }
       </details>
     </div> }
 
     { /* Open */ }
-    { isLoadingOrLoadedWithResults(filteredOpen) && 
+    { isLoadingOrLoadedWithResults(filteredOpen) &&
     <div className="aether-venues__venues aether-venues__opennow">
       <details open>
         <summary><h2>Open now</h2></summary>
-        { listView 
+        { listView
           ? <VenueList venues={filteredOpen} />
           : <VenueStrip venues={filteredOpen} />
         }
@@ -152,13 +159,25 @@ export function VenueDirectory(props) {
     </div> }
 
     { /* Newest */ }
-    { isLoadingOrLoadedWithResults(filteredNewest) && 
+    { isLoadingOrLoadedWithResults(filteredNewest) &&
     <div className="aether-venues__venues aether-venues__new-venues">
       <details open={!listView}>
         <summary><h2>Newest</h2></summary>
-        { listView 
+        { listView
           ? <VenueList venues={filteredNewest} />
           : <VenueStrip venues={filteredNewest} />
+        }
+      </details>
+    </div> }
+
+    { /* Hiring */ }
+    { isLoadingOrLoadedWithResults(filteredHiring) &&
+    <div className="aether-venues__venues aether-venues__now-hiring">
+      <details open>
+        <summary><h2>Hiring</h2></summary>
+        { listView
+          ? <VenueList venues={filteredHiring} />
+          : <VenueStrip venues={filteredHiring} />
         }
       </details>
     </div> }
@@ -169,11 +188,11 @@ export function VenueDirectory(props) {
     </div>
 
     { /* Unscheduled */ }
-    { isLoadingOrLoadedWithResults(filteredUnscheduled) && 
+    { isLoadingOrLoadedWithResults(filteredUnscheduled) &&
     <div className="aether-venues__venues aether-venues__unscheduled-venues">
       <details open>
         <summary><h2>Unscheduled</h2></summary>
-        { listView 
+        { listView
           ? <VenueList venues={filteredUnscheduled} />
           : <VenueStrip venues={filteredUnscheduled} />
         }
