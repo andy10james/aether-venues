@@ -48,13 +48,6 @@ class App extends React.Component {
       <React.Fragment>
         <ModalStage />
         <div className="aether-venues">
-          <div className="aether-venues__heading">
-            <h1><img src="full-logo.png" alt="FFXIV Venues" /></h1>
-            <div className="aether-venues__view-toggle">
-              <button onClick={this.switchToListView} className={this.state.listView ? `active` : undefined}><ListViewIcon /> List view</button>
-              <button onClick={this.switchToCardView} className={this.state.listView ? undefined : `active`}><CardViewIcon /> Card view</button>
-            </div>
-          </div>
           <Notice />
           <div className={`aether-venues__list ${ this.state.listView ? `aether-venues__list--list-view` : `aether-venues__list--card-view` }`}>
             <VenueDirectory listView={this.state.listView} />

@@ -190,7 +190,7 @@ a {
 
 .aether-venues__list {
   margin-left: 300px;
-  margin-top: 90px;
+  margin-top: 20px;
   margin-bottom: 7.5vh;
   width: calc(100vw - 320px - var(--scroll-bar-width));
 }

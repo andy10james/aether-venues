@@ -1,7 +1,11 @@
+.venue-card {
+    display: inline-block;
+}
+
 .venue-card__block {
+    display: inline-block;
     width: 350px;
     height: 175px;
-    border-radius: 5px;
     box-sizing: border-box;
     color: white;
     font-size: 1rem;

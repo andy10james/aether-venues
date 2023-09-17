@@ -4,7 +4,7 @@ import { VenueFiltersPanel } from "./VenueFiltersPanel";
 import { venueService } from "../../services/venues/venueService";
 import { favouritesService } from "../../services/favouritesService";
 import { timeService } from "../../services/timeService";
-import { VenueStrip } from "../venue-strip/VenueStrip";
+import { VenueCollection } from "../venue-strip/VenueCollection";
 import { VenueList } from "../venue-list/VenueList";
 import days from "../../consts/days.json";
 import "./venue-directory.css"
@@ -106,7 +106,7 @@ export function VenueDirectory(props) {
           <summary><h2>{currentDay === i ? `Today (${days[i]})` : currentDay === i - 1 ? `Tomorrow (${days[i]})` : days[i]}</h2></summary>
           { listView 
             ? <VenueList venues={filteredScheduled} />
-            : <VenueStrip venues={filteredScheduled} /> }
+            : <VenueCollection venues={filteredScheduled} /> }
         </details>
       </div>
     )
@@ -114,12 +114,12 @@ export function VenueDirectory(props) {
 
 
   return <>
-    <VenueFiltersPanel onSearch={s => setSearch(s)}
-                       onRegionFilterUpdated={setRegionFilter}
-                       onDataCenterFilterUpdated={setDataCenterFilter}
-                       onWorldFilterUpdated={setWorldFilter}
-                       onTypeFilterUpdated={setTypeFilters}
-                       onFeatureFilterUpdated={setFeatureFilters} />
+    {/*<VenueFiltersPanel onSearch={s => setSearch(s)}*/}
+    {/*                   onRegionFilterUpdated={setRegionFilter}*/}
+    {/*                   onDataCenterFilterUpdated={setDataCenterFilter}*/}
+    {/*                   onWorldFilterUpdated={setWorldFilter}*/}
+    {/*                   onTypeFilterUpdated={setTypeFilters}*/}
+    {/*                   onFeatureFilterUpdated={setFeatureFilters} />*/}
 
 
     { isLoadedButNoResult(filteredUnscheduled) && scheduledVenuesRender.length === 0 &&
@@ -131,36 +131,28 @@ export function VenueDirectory(props) {
     { /* Favorites */ }
     { isLoadingOrLoadedWithResults(filteredFavorites) && 
     <div className="aether-venues__venues aether-venues__favourite-venues">
-      <details open>
-        <summary><h2>Favorites</h2></summary>
-        { listView 
-          ? <VenueList venues={filteredFavorites} />
-          : <VenueStrip venues={filteredFavorites} /> }
-      </details>
+        <h2>Favorites</h2>
+        <div className="aether-venues__venues-list">
+            <VenueCollection venues={filteredFavorites} />
+        </div>
     </div> }
 
     { /* Open */ }
     { isLoadingOrLoadedWithResults(filteredOpen) && 
     <div className="aether-venues__venues aether-venues__opennow">
-      <details open>
-        <summary><h2>Open now</h2></summary>
-        { listView 
-          ? <VenueList venues={filteredOpen} />
-          : <VenueStrip venues={filteredOpen} />
-        }
-      </details>
+        <h2>Open now</h2>
+        <div className="aether-venues__venues-list">
+            <VenueCollection venues={filteredOpen} />
+        </div>
     </div> }
 
     { /* Newest */ }
     { isLoadingOrLoadedWithResults(filteredNewest) && 
     <div className="aether-venues__venues aether-venues__new-venues">
-      <details open={!listView}>
-        <summary><h2>Newest</h2></summary>
-        { listView 
-          ? <VenueList venues={filteredNewest} />
-          : <VenueStrip venues={filteredNewest} />
-        }
-      </details>
+      <h2>Newest</h2>
+      <div className="aether-venues__venues-list">
+        <VenueCollection venues={filteredNewest} />
+      </div>
     </div> }
 
     { /* Scheduled */ }
@@ -171,13 +163,10 @@ export function VenueDirectory(props) {
     { /* Unscheduled */ }
     { isLoadingOrLoadedWithResults(filteredUnscheduled) && 
     <div className="aether-venues__venues aether-venues__unscheduled-venues">
-      <details open>
-        <summary><h2>Unscheduled</h2></summary>
-        { listView 
-          ? <VenueList venues={filteredUnscheduled} />
-          : <VenueStrip venues={filteredUnscheduled} />
-        }
-      </details>
+      <h2>Unscheduled</h2>
+      <div className="aether-venues__venues-list">
+        <VenueCollection venues={filteredUnscheduled} />
+      </div>
     </div> }
   </>
 }

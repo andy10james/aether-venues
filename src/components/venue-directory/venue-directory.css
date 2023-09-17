@@ -2,3 +2,23 @@
     margin-top: 30px;
     margin-left: 30px;
 }
+
+.aether-venues__venues {
+    position: relative;
+    border-bottom: solid 2px #2E2E2E;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.aether-venues__venues h2 {
+    rotate: -90deg;
+    position: absolute;
+    top: 55px;
+    left: -45px;
+    display: block;
+    margin: 0;
+}
+
+.aether-venues__venues .aether-venues__venues-list {
+    margin-left: 45px
+}
