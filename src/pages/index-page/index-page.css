@@ -1,9 +1,12 @@
+.index-page {
+}
+
+.index-page__index-menu {
+    margin-left: 20px;
+}
+
 
 @media screen and (min-width: 1245px) {
-    .aether-venues__staff-list--collapsible { display: block; }
-    .aether-venues__staff-list--not-collapsible {  display: none; }
-    .aether-venues__patron-list--collapsible { display: block; }
-    .aether-venues__patron-list--not-collapsible {  display: none; }
 }
 
 @media screen and (max-width: 1245px) {

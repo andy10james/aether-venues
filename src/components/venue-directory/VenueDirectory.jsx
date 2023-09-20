@@ -1,11 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { VenueFiltersPanel } from "./VenueFiltersPanel";
+// import { VenueFiltersPanel } from "./VenueFiltersPanel";
 import { venueService } from "../../services/venues/venueService";
 import { favouritesService } from "../../services/favouritesService";
 import { timeService } from "../../services/timeService";
 import { VenueCollection } from "../venue-strip/VenueCollection";
-import { VenueList } from "../venue-list/VenueList";
 import days from "../../consts/days.json";
 import "./venue-directory.css"
 
@@ -14,10 +13,8 @@ const isLoadedButNoResult = (venues) =>
 
 const isLoadingOrLoadedWithResults = (venues) => !isLoadedButNoResult(venues);
 
-export function VenueDirectory(props) {
+export function VenueDirectory() {
   
-  let { listView } = props;
-
   // filter states
   const [ search, setSearch ] = useState(null);
   const [ regionFilter, setRegionFilter ] = useState(null);
@@ -102,18 +99,16 @@ export function VenueDirectory(props) {
       continue;
     scheduledVenuesRender.push(
       <div className="aether-venues__day" key={i}>
-        <details open>
-          <summary><h2>{currentDay === i ? `Today (${days[i]})` : currentDay === i - 1 ? `Tomorrow (${days[i]})` : days[i]}</h2></summary>
-          { listView 
-            ? <VenueList venues={filteredScheduled} />
-            : <VenueCollection venues={filteredScheduled} /> }
-        </details>
+        <h2>{currentDay === i ? `Today (${days[i]})` : currentDay === i - 1 ? `Tomorrow (${days[i]})` : days[i]}</h2>
+        <div className="aether-venues__venues-list">
+          <VenueCollection venues={filteredScheduled} />
+        </div>
       </div>
     )
   }
 
 
-  return <>
+  return <div className="aether-venues__list">
     {/*<VenueFiltersPanel onSearch={s => setSearch(s)}*/}
     {/*                   onRegionFilterUpdated={setRegionFilter}*/}
     {/*                   onDataCenterFilterUpdated={setDataCenterFilter}*/}
@@ -168,5 +163,5 @@ export function VenueDirectory(props) {
         <VenueCollection venues={filteredUnscheduled} />
       </div>
     </div> }
-  </>
+  </div>
 }
