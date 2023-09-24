@@ -8,11 +8,6 @@ Sentry.init({
   environment: process.env.REACT_APP_FFXIV_VENUES_SENTRY_ENVIRONMENT,
   dsn: process.env.REACT_APP_FFXIV_VENUES_SENTRY_DSN
 });
-document.querySelector(':root').style.setProperty('--hero-image', [
-  `url("/hero-strip/hero-strip-0.jpg")`,
-  `url("/hero-strip/hero-strip-1.jpg")`,
-  `url("/hero-strip/hero-strip-2.jpg")`,
-  `url("/hero-strip/hero-strip-3.jpg")`
-][Math.floor(Math.random()*4)]);
+
 const root = createRoot(document.querySelector('.app-root'));
 root.render(<React.StrictMode><App /></React.StrictMode>);

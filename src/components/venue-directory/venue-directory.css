@@ -3,22 +3,24 @@
     margin-left: 30px;
 }
 
-.aether-venues__venues {
-    position: relative;
+.venue-directory__list-section {
     border-bottom: solid 2px #2E2E2E;
     margin-bottom: 10px;
     padding-bottom: 10px;
+    display: flex;
+    padding-top: 10px;
 }
 
-.aether-venues__venues h2 {
-    rotate: -90deg;
-    position: absolute;
-    top: 55px;
-    left: -45px;
+.venue-directory__list-section .venue-opening {
+    margin-left: 5px
+}
+
+.venue-directory__list-section h2 {
+    writing-mode:vertical-rl;
     display: block;
-    margin: 0;
+    margin: 10px 10px 10px 15px;
 }
 
-.aether-venues__venues .aether-venues__venues-list {
-    margin-left: 45px
+.venue-directory__list-section .venue-directory__list {
+    width:95%;
 }

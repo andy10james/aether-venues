@@ -34,19 +34,24 @@ class VenueCard extends VenueOpening {
     }
 
     render() {
-        return <div id={"venue-" + (this.props.venue.id)} className={"venue-card " + 
-                                                                    (this.props.venue.id) + 
-                                                                    (this.props.venue.open ? " venue-card--open" : "") + 
-                                                                    (this.props.opening ? "" : " venue-card--no-time")}>
+        const classes = [];
+        classes.push("venue-card__container");
+        if (this.props.className) classes.push(this.props.className);
+        if (this.props.venue.isNew()) classes.push("venue-card__container--new");
+        if (this.props.venue.open) classes.push("venue-card__container--open");
 
-            <div className="venue-card__block"
-                 role="row"
+        return <>
+
+            <div id={"venue-" + (this.props.venue.id)}
+                 className={classes.join(" ")}
                  onClick={ this._onVenueClick.bind(this) }>
 
-                { this.props.venue.bannerUri
-                    ? <img className="venue-card__photo" src={this.props.venue.bannerUri} alt="" loading="lazy" />
-                    : <img className="venue-card__photo" src={defaultImage} alt="" loading="lazy" />
-                }
+                <div className="venue-card__photo-container">
+                    { this.props.venue.bannerUri
+                        ? <img className="venue-card__photo" src={this.props.venue.bannerUri} alt="" loading="lazy" />
+                        : <img className="venue-card__photo" src={defaultImage} alt="" loading="lazy" />
+                    }
+                </div>
 
                 <div className="venue-card__options">
                     <FavoriteIcon lit={this.props.venue.isFavorite()} onClick={e => this.toggleFavorite(e) } />
@@ -55,15 +60,8 @@ class VenueCard extends VenueOpening {
                         <UnvisitedIcon onClick={e => this.setVisited(e)} /> }
                 </div>
 
-                { this.props.venue.isNew() ?
-                    <div className="venue-card__new">new!</div> :
-                    null
-                }
-
-                { this.props.venue.open ?
-                    <div className="venue-card__open">Open now!</div> :
-                    null
-                }
+                <div className="venue-card__new">New</div>
+                <div className="venue-card__open">Open now</div>
 
                 <div className="venue-card__summary">
                     <div className="venue-card__name">
@@ -77,10 +75,6 @@ class VenueCard extends VenueOpening {
                             <div className="venue-card__end">{this.props.opening.local.end && <Time time={this.props.opening.local.end} day={this.props.opening.local.day} format24={false} /> }</div>
                         </div>
                     }
-
-                    <div className="venue-card__location">
-                        <Location location={this.props.venue.location} shorten />
-                    </div>
                 </div>
             </div>
             { this.state.openModal &&
@@ -89,7 +83,7 @@ class VenueCard extends VenueOpening {
                     <VenueProfile venue={this.props.venue} />
                 </Modal>
             }
-        </div>
+        </>
     }
 
 }

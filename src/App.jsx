@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { IndexPage } from "./pages/index-page/IndexPage";
 import { Layout } from "./pages/Layout";
 import { NotFoundPage } from "./pages/NotFoundPage";
-import './App.css';
 
 class App extends React.Component {
 
@@ -29,4 +28,3 @@ class App extends React.Component {
 }
 
 export { App };
-

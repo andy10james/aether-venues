@@ -7,3 +7,10 @@
     box-shadow: #181818 0 0 3px;
     margin-Left: 20px;
 }
+
+
+@media screen and (max-width: 615px) {
+    .modal-stage__modal.new-venue-modal {
+        width: 100%;
+    }
+}

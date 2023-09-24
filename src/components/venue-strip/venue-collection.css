@@ -1,10 +1,48 @@
-.venue-collection {
+.venue-collection__container {
     width: 100%;
-    position: relative;
+    container-name: collection-container;
+    container-type: inline-size;
+}
+
+.venue-collection__grid {
+    display: grid;
+    grid-template-columns: repeat(5, calc(20% - 10px));
+    grid-gap: 10px;
 }
 
 .venue-card, .loading-component {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 20px;
+}
+
+.venue-collection__container .venue-collection__venue-card {
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    height: auto;
+    margin: 10px;
+}
+
+@container collection-container (width < 1500px) {
+    .venue-collection__grid {
+        grid-template-columns: repeat(4, calc(25% - 10px));
+    }
+}
+
+@container collection-container (width < 1250px) {
+    .venue-collection__grid {
+        grid-template-columns: repeat(3, calc(33% - 10px));
+    }
+}
+
+@container collection-container (width < 900px) {
+    .venue-collection__grid {
+        grid-template-columns: repeat(2, calc(49% - 10px));
+    }
+}
+
+@container collection-container (width < 600px) {
+    .venue-collection__grid {
+        grid-template-columns: calc(95% - 10px);
+    }
 }

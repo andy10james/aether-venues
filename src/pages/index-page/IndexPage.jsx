@@ -18,7 +18,7 @@ export const IndexPage = () => {
   return (
     <div className="index-page__container">
       <IndexMenu className="index-page__index-menu" />
-      <VenueDirectory />
+      <VenueDirectory className="index-page__venue-directory" />
 
       { requestedVenue &&
         <Modal className="venue-modal" onStageClick={_ => setRequestedVenue(null) }>

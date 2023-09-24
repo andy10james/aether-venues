@@ -5,9 +5,44 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--foundation-color);
+  color: white;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+a {
+  color: inherit;
+}
+
+@font-face {
+  font-family: 'Hingashi Extended';
+  src: url("assets/HingashiExtended.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Jupiter Pro';
+  src: url("assets/JupiterProBold.ttf") format("truetype");
+}
+
+
+
+:root {
+  --foreground-color: rgb(221, 221, 221);
+  --background-color: rgb(36,36,36);
+  --foundation-color: rgb(20, 20, 20);
+  --outline-color: rgb(46, 46, 46);
+  --accent-dark-color: rgba(113, 60, 127);
+  --accent-color: rgba(228,128,254);
+  --new-color: rgb(255, 168, 23);
+
+  --scroll-bar-width: calc(100vw - 100%);
+
+  --hero-image: url("assets/default-strip.jpg");
+
+  font-size: 16px;
+}
+

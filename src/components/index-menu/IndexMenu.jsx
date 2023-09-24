@@ -12,8 +12,7 @@ export const IndexMenu = (props) => {
 
   return (
     <>
-      <div className={["index-menu__container", props.className ]}>
-
+      <div className={"index-menu__container " + props.className}>
         <FilterMenu heading={{
           name: "All regions",
           icon: globeIcon
