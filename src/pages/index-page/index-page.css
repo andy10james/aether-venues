@@ -1,11 +1,21 @@
-.index-page {
+.index-page__container {
+    width: calc(100vw - var(--scroll-bar-width));
 }
 
 .index-page__index-menu {
-    margin-left: 20px;
+    width: 230px;
+    background-color: var(--background-color);
+    border-left: solid 1px var(--outline-color);
+    border-right: solid 1px var(--outline-color);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 20px;
 }
 
-.index-page__index-menu .aether-venues__list {
+.index-page__venue-directory {
+    width: auto;
+    margin-left: 270px;
     margin-top: 20px;
-    width: calc(100vw - 320px - var(--scroll-bar-width));
+    margin-right: 20px;
 }

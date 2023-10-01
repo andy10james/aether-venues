@@ -35,7 +35,7 @@
     }
 }
 
-@container collection-container (width < 900px) {
+@container collection-container (width < 800px) {
     .venue-collection__grid {
         grid-template-columns: repeat(2, calc(49% - 10px));
     }

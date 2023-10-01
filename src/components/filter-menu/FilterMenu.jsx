@@ -11,10 +11,7 @@ export function FilterMenu(props) {
   const key = props.stackKey === undefined ? 0 : props.stackKey;
 
   const style = { //todo move this to stylesheet
-    margin: 0,
-    listStyle: "none",
-    paddingLeft: 0,
-    width: "100%",
+
     ...props.style,
     active: {
       borderTopColor: "#E480FE",
@@ -106,7 +103,7 @@ export function FilterMenu(props) {
   }, [ props.activeStack ]);
 
   return (
-      <ul style={style}>
+      <ul style={style} className="filter-menu__container">
         {
           props.heading &&
           <li style={style.li}>

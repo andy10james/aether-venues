@@ -16,9 +16,14 @@
 }
 
 .venue-directory__list-section h2 {
-    writing-mode:vertical-rl;
+    font-size: 1.35em;
+    writing-mode: vertical-rl;
     display: block;
-    margin: 10px 10px 10px 15px;
+    margin: 10px 5px;
+}
+
+.venue-directory__list-heading--open-now {
+    color: var(--accent-color);
 }
 
 .venue-directory__list-section .venue-directory__list {

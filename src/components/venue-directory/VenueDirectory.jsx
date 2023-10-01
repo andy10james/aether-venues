@@ -102,7 +102,7 @@ export function VenueDirectory(props) {
     { /* Open */ }
     { isLoadingOrLoadedWithResults(filteredOpen) && 
     <div className="venue-directory__list-section venue-directory__list-section-opennow">
-      <h2>Open now</h2>
+      <h2 className="venue-directory__list-heading--open-now">Open now</h2>
       <VenueCollection className="venue-directory__list" venues={filteredOpen} />
     </div> }
 

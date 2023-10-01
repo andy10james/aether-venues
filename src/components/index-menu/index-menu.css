@@ -1,13 +1,58 @@
 .index-menu__container {
-    height: 100vh;
-    width: 200px;
-    background-color: #242424;
-    border-left: solid 1px #2F2F2F;
-    border-right: solid 1px #2F2F2F;
-    box-shadow: #181818 0 0 3px;
-    margin-Left: 20px;
 }
 
+.index-menu__logo-container {
+    padding: 15px;
+    border-bottom: solid 1px var(--outline-color);
+
+    & h1 {
+        margin: 0;
+    }
+}
+
+.index-menu__user-container {
+    border-bottom: solid 1px var(--outline-color);
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & .index-menu__user-detail {
+        display: flex;
+        align-items: center;
+
+        & .index-menu__avatar {
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            margin-right: 15px;
+        }
+
+        & .index-menu__username {
+            font-size: 1em;
+        }
+    }
+
+    & .index-menu__settings-icon {
+        width: 20px;
+        cursor: pointer;
+    }
+}
+
+.index-menu__add-venue {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: solid 1px var(--outline-color);
+
+    & img {
+        margin-right: 15px
+    }
+}
+
+.index-menu__search-container {
+    margin: 15px;
+}
 
 @media screen and (max-width: 615px) {
     .modal-stage__modal.new-venue-modal {

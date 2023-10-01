@@ -20,13 +20,19 @@
     box-shadow: black 0 0 7px;
 }
 
-.venue-card__container--open .venue-card__photo-container {
-    box-shadow: var(--accent-color) 0 0 7px;
-    border: solid 2px var(--accent-color);
+.venue-card__container--favorite .venue-card__photo-container {
+    box-shadow: var(--favorite-color) 0 0 7px;
+    border: solid 1px var(--favorite-color);
 }
 
 .venue-card__container--new .venue-card__photo-container {
+    box-shadow: var(--new-color) 0 0 7px;
     border: solid 1px var(--new-color);
+}
+
+.venue-card__container--open .venue-card__photo-container {
+    box-shadow: var(--accent-color) 0 0 7px;
+    border: solid 2px var(--accent-color);
 }
 
 .venue-card__photo {
@@ -40,18 +46,6 @@
 .venue-card__summary {
     text-align: right;
     padding: 5px 10px;
-    /*height: 50px;*/
-}
-
-.venue-card__options {
-    float: left;
-    margin: 15px 0 15px 15px;
-}
-
-.venue-card__options svg {
-    width: 1.3rem;
-    filter: drop-shadow( 0 0 15px black);
-    margin-right: .75rem;
 }
 
 .venue-card__name {
@@ -63,46 +57,36 @@
     width: 100%;
 }
 
-.venue-card__new {
-    display: none;
+.venue-card__tags {
     position: absolute;
-    left: 0;
     bottom: 100%;
-    background-color: var(--new-color);
-    color: var(--background-color);
+    width: 100%;
     font-size: .8rem;
     font-weight: bold;
     text-shadow: none;
-    padding: 3px 10px;
     line-height: 1rem;
-}
-
-.venue-card__container--new .venue-card__new {
-    display: block;
-}
-
-/*.venue-card__options .favorite-icon.favorite-icon--lit path {*/
-/*    stroke: darkorange !important;*/
-/*    fill: darkorange !important;*/
-/*}*/
-
-.venue-card__open {
-    display: none;
-    position: absolute;
-    left: 0;
-    bottom: 100%;
-    background-color: var(--accent-color);
     color: var(--background-color);
-    font-size: .8rem;
-    font-weight: bold;
-    text-shadow: none;
-    padding: 3px 10px;
-    line-height: 1rem;
 }
 
-.venue-card__container--open .venue-card__open {
-    display: block;
+.venue-card__new,
+.venue-card__open,
+.venue-card__visited,
+.venue-card__favorite {
+    display: none;
+    padding: 3px 8px;
 }
+
+.venue-card__new { float: left; margin-right: 5px; background-color: var(--new-color); }
+.venue-card__open { float: left; margin-right: 5px; background-color: var(--accent-color); }
+.venue-card__visited { float: right; background-color: var(--visited-color); }
+.venue-card__favorite { float: right; margin-left: 5px; background-color: var(--favorite-color) }
+
+
+.venue-card__container--new .venue-card__new { display: block; }
+.venue-card__container--open .venue-card__open { display: block; }
+.venue-card__container--visited .venue-card__visited { display: block; }
+.venue-card__container--favorite .venue-card__favorite { display: block; }
+
 
 .venue-card__time {
     font-size: .95em;

@@ -35,9 +35,11 @@ a {
   --background-color: rgb(36,36,36);
   --foundation-color: rgb(20, 20, 20);
   --outline-color: rgb(46, 46, 46);
-  --accent-dark-color: rgba(113, 60, 127);
+  --accent-dark-color: rgb(112, 70, 126);
   --accent-color: rgba(228,128,254);
   --new-color: rgb(255, 168, 23);
+  --visited-color: #51D093;
+  --favorite-color: #75CB4D;
 
   --scroll-bar-width: calc(100vw - 100%);
 

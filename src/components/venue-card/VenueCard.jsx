@@ -7,31 +7,10 @@ import { visitedService } from "../../services/visitedService";
 import { VenueProfile } from "../venue-profile/VenueProfile";
 import { VenueOpening } from "../venue-opening/VenueOpening";
 import { FavoriteIcon } from "../icons/FavoriteIcon";
-import { ReactComponent as VisitedIcon } from "../../assets/icons/visited-icon.svg";
-import { ReactComponent as UnvisitedIcon } from "../../assets/icons/not-visited-icon.svg";
 import defaultImage from "./default-banner.jpg";
 import { Location } from "../location/Location";
 
 class VenueCard extends VenueOpening {
-
-    toggleFavorite(e) {
-        if (this.props.venue.isFavorite()) favouritesService.removeFavourite(this.props.venue.id);
-        else favouritesService.setFavourite(this.props.venue.id);        
-        e.stopPropagation();
-        this.forceUpdate();
-    }
-
-    removeVisited(e) {
-        visitedService.removeVisited(this.props.venue.id);
-        e.stopPropagation();
-        this.forceUpdate();
-    }
-
-    setVisited(e) {
-        visitedService.setVisited(this.props.venue.id);
-        e.stopPropagation();
-        this.forceUpdate(); 
-    }
 
     render() {
         const classes = [];
@@ -39,6 +18,10 @@ class VenueCard extends VenueOpening {
         if (this.props.className) classes.push(this.props.className);
         if (this.props.venue.isNew()) classes.push("venue-card__container--new");
         if (this.props.venue.open) classes.push("venue-card__container--open");
+        if (favouritesService.isFavourite(this.props.venue.id))
+            classes.push("venue-card__container--favorite");
+        if (visitedService.isVisited(this.props.venue.id))
+            classes.push("venue-card__container--visited");
 
         return <>
 
@@ -47,21 +30,15 @@ class VenueCard extends VenueOpening {
                  onClick={ this._onVenueClick.bind(this) }>
 
                 <div className="venue-card__photo-container">
-                    { this.props.venue.bannerUri
-                        ? <img className="venue-card__photo" src={this.props.venue.bannerUri} alt="" loading="lazy" />
-                        : <img className="venue-card__photo" src={defaultImage} alt="" loading="lazy" />
-                    }
+                    <img className="venue-card__photo" src={this.props.venue.bannerUri || defaultImage} alt="" loading="lazy" />
                 </div>
 
-                <div className="venue-card__options">
-                    <FavoriteIcon lit={this.props.venue.isFavorite()} onClick={e => this.toggleFavorite(e) } />
-                    { this.props.venue.isVisited() ?
-                        <VisitedIcon onClick={e => this.removeVisited(e)} /> :
-                        <UnvisitedIcon onClick={e => this.setVisited(e)} /> }
+                <div className="venue-card__tags">
+                    <div className="venue-card__open">Open now</div>
+                    <div className="venue-card__new">New</div>
+                    <div className="venue-card__favorite">Favorite</div>
+                    <div className="venue-card__visited">Visited</div>
                 </div>
-
-                <div className="venue-card__new">New</div>
-                <div className="venue-card__open">Open now</div>
 
                 <div className="venue-card__summary">
                     <div className="venue-card__name">
