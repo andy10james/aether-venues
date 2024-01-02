@@ -13,6 +13,7 @@ import { Location } from "../location/Location";
 class VenueCard extends VenueOpening {
 
     render() {
+        const openingResolution = this.props.opening?.resolution || this.props.venue.resolution;
         const classes = [];
         classes.push("venue-card__container");
         if (this.props.className) classes.push(this.props.className);
@@ -45,12 +46,13 @@ class VenueCard extends VenueOpening {
                         { this.props.venue.name }
                     </div>
 
-                    { this.props.opening &&
-                        <div className="venue-card__time">
-                            <div className="venue-card__start"><Time time={this.props.opening.local.start} day={this.props.opening.local.day} format24={false} /></div>
-                            <div className="venue-card__time-split">{this.props.opening.local.end && <React.Fragment>-</React.Fragment>}</div>
-                            <div className="venue-card__end">{this.props.opening.local.end && <Time time={this.props.opening.local.end} day={this.props.opening.local.day} format24={false} /> }</div>
-                        </div>
+                    { openingResolution &&
+                      <div className="venue-card__time">
+                        <div className="venue-card__date"><DateString date={openingResolution.start} /></div>
+                        <div className="venue-card__start"><TimeString date={openingResolution.start} format24={false} /></div>
+                        <div className="venue-card__time-split">-</div>
+                        <div className="venue-card__end"><TimeString date={openingResolution.end} format24={false} /></div>
+                      </div>
                     }
                 </div>
             </div>
