@@ -2,12 +2,12 @@ import React from 'react';
 import './App.css';
 import './Responsive.css';
 import { ModalStage } from "./components/modal-stage/ModalStage";
-import { venueService } from './services/venues/venueService';
+import { venueService } from './services/venueService';
 import { Modal } from "./components/modal/Modal";
 import { VenueProfile } from "./components/venue-profile/VenueProfile";
 import { VenueDirectory } from './components/venue-directory/VenueDirectory';
 import { PersonList } from './components/person-list/PersonList';
-import { staff, patrons} from "./components/person-list/PeopleLists";
+import { staff} from "./components/person-list/PeopleLists";
 import { ReactComponent as DiscordIcon } from "./assets/icons/discord-icon.svg";
 import { ReactComponent as NewVenue } from "./assets/icons/new-venue-icon.svg";
 import { ReactComponent as ListViewIcon } from "./assets/icons/list-view-icon.svg";
@@ -54,10 +54,6 @@ class App extends React.Component {
               <button onClick={this.switchToListView} className={this.state.listView ? `active` : undefined}><ListViewIcon /> List view</button>
               <button onClick={this.switchToCardView} className={this.state.listView ? undefined : `active`}><CardViewIcon /> Card view</button>
             </div>
-            <div className="aether-venues__colaborators">
-              In collaboration with
-              <a href="https://aetherentertainer.carrd.co/" target="_blank" rel="noreferrer"><img src="aether-entertainer.png" alt="Aether Entertainer Gazette" /></a>
-            </div>
           </div>
           <Notice />
           <div className={`aether-venues__list ${ this.state.listView ? `aether-venues__list--list-view` : `aether-venues__list--card-view` }`}>
@@ -77,8 +73,6 @@ class App extends React.Component {
             <div className="aether-venues__people-lists">
               <PersonList className="aether-venues__staff-list aether-venues__staff-list--collapsible" heading="Meet the staff" people={staff} collapsible={true} />
               <PersonList className="aether-venues__staff-list aether-venues__staff-list--not-collapsible" heading="Meet the staff" people={staff} collapsible={false} />
-              <PersonList className="aether-venues__patron-list aether-venues__patron-list--collapsible" heading="Meet our patrons" people={patrons} footer={<a href="https://www.patreon.com/ffxivvenues" target="_blank" rel="noreferrer">Become a patron!</a>} collapsible={true} />
-              <PersonList className="aether-venues__patron-list aether-venues__patron-list--not-collapsible" heading="Meet our patrons" people={patrons} footer={<a href="https://www.patreon.com/ffxivvenues" target="_blank" rel="noreferrer">Become a patron!</a>} collapsible={false} />
             </div>
           </div>
           { this.state.requestedVenue &&

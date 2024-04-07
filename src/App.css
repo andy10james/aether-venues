@@ -17,11 +17,13 @@
 
   --scroll-bar-width: calc(100vw - 100%);
 
+  --hero-image: url("assets/default-strip.jpg");
+
   font-size: 16px;
 }
 
 body {
-  background-image: url("assets/hero-strip.jpg");
+  background-image: var(--hero-image);
   background-position-x: 000px;
   background-attachment: fixed;
   background-size: 280px auto;

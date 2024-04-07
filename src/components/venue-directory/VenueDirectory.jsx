@@ -101,14 +101,16 @@ export function VenueDirectory(props) {
     if (isLoadedButNoResult(filteredScheduled))
       continue;
     scheduledVenuesRender.push(
-      <div className="aether-venues__day" key={i}>
-        <details open>
-          <summary><h2>{currentDay === i ? `Today (${days[i]})` : currentDay === i - 1 ? `Tomorrow (${days[i]})` : days[i]}</h2></summary>
-          { listView 
-            ? <VenueList venues={filteredScheduled} />
-            : <VenueStrip venues={filteredScheduled} /> }
-        </details>
-      </div>
+      <Profiler id={`venue-directory__scheduled-day-${i}`} onRender={(id, phase, duration) => console.log(`${id} rendered (${phase}) in ${duration}ms.`)} key={i}>
+        <div className="aether-venues__day" key={i}>
+          <details open>
+            <summary><h2>{currentDay === i ? `Today (${days[i]})` : currentDay === i - 1 ? `Tomorrow (${days[i]})` : days[i]}</h2></summary>
+            { listView
+              ? <VenueList venues={filteredScheduled} />
+              : <VenueStrip venues={filteredScheduled} /> }
+          </details>
+        </div>
+      </Profiler>
     )
   }
 

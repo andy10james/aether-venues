@@ -1,11 +1,7 @@
-import React from "react";
-import "./notice.css";
-
 function Notice() {
-    return <></>;
-    // return (<div className='notice'>
-    //     The issue with uBlock Origin blocking ads has been resolved. Sorry for inconvenience, sepeku have been scheduled.
-    // </div>)
+    return <div className="notice">
+        Welcome to everyone from Oceania! Enjoy your expanded community. ♥ May all your venue belong to us. ♥
+    </div>;
 }
 
 export { Notice };

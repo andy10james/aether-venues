@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { isMobile } from "react-device-detect";
-import { propFilter, tagFilter, worldFilter, dataCenterFilter, regionFilter } from "./VenueFilters";
+import {propFilter, tagFilter, worldFilter, dataCenterFilter, regionFilter, propNotNull} from "./VenueFilters";
 import { HorizontalScroll } from "../horizontal-scroll/HorizontalScroll";
 import "./filter-panel.css";
 
@@ -8,7 +8,7 @@ const regionFilters = [
   { key: Symbol(), label: "North America", filter: regionFilter("NA") },
   { key: Symbol(), label: "Europe", filter: regionFilter("EU") },
   // { key: Symbol(), label: "Japan", filter: regionFilter("JP") },
-  // { key: Symbol(), label: "Oceania", filter: regionFilter("OC") }
+  { key: Symbol(), label: "Oceania", filter: regionFilter("OC") }
 ];
 
 const dataCenterFilters = [
@@ -20,8 +20,8 @@ const dataCenterFilters = [
   // { key: Symbol(), label: "Gaia", filter: dataCenterFilter("Gaia") },
   // { key: Symbol(), label: "Mana", filter: dataCenterFilter("Mana") },
   { key: Symbol(), label: "Chaos", filter: dataCenterFilter("Chaos") },
-  { key: Symbol(), label: "Light", filter: dataCenterFilter("Light") }
-  // { key: Symbol(), label: "Materia", filter: dataCenterFilter("Materia") },
+  { key: Symbol(), label: "Light", filter: dataCenterFilter("Light") },
+  { key: Symbol(), label: "Materia", filter: dataCenterFilter("Materia") },
 ];
 
 const worldFilters = [
@@ -73,7 +73,13 @@ const worldFilters = [
   { key: Symbol(), label: "Raiden", filter: worldFilter("Raiden") },
   { key: Symbol(), label: "Shiva", filter: worldFilter("Shiva") },
   { key: Symbol(), label: "Twintania", filter: worldFilter("Twintania") },
-  { key: Symbol(), label: "Zodiark", filter: worldFilter("Zodiark") }
+  { key: Symbol(), label: "Zodiark", filter: worldFilter("Zodiark") },
+
+  { key: Symbol(), label: "Bismarck", filter: worldFilter("Bismarck") },
+  { key: Symbol(), label: "Ravana", filter: worldFilter("Ravana") },
+  { key: Symbol(), label: "Sephirot", filter: worldFilter("Sephirot") },
+  { key: Symbol(), label: "Sophia", filter: worldFilter("Sophia") },
+  { key: Symbol(), label: "Zurvan", filter: worldFilter("Zurvan") }
 ];
 
 const typeFilters = [
@@ -94,6 +100,7 @@ const typeFilters = [
 ];
 
 const featureFilters = [
+  { key: Symbol(), label: "Has SyncShell", filter: propNotNull("mareCode") },
   { key: Symbol(), label: "SFW", filter: propFilter("sfw", true) },
   { key: Symbol(), label: "Gambling", filter: tagFilter("gambling") },
   { key: Symbol(), label: "Artists", filter: tagFilter("artists") },
