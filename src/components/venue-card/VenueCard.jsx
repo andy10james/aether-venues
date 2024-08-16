@@ -1,16 +1,15 @@
 import React from "react";
 import "./venue-card.css";
 import { Modal } from "../modal/Modal";
-import { Time } from "../time/Time";
 import { favouritesService } from "../../services/favouritesService";
 import { visitedService } from "../../services/visitedService";
 import { VenueProfile } from "../venue-profile/VenueProfile";
-import { VenueOpening } from "../venue-opening/VenueOpening";
-import { FavoriteIcon } from "../icons/FavoriteIcon";
+import { VenueListing } from "../venue-listing/VenueListing";
 import defaultImage from "./default-banner.jpg";
-import { Location } from "../location/Location";
+import {DateString} from "../date-string/DateString";
+import {TimeString} from "../time-string/TimeString";
 
-class VenueCard extends VenueOpening {
+class VenueCard extends VenueListing {
 
     render() {
         const openingResolution = this.props.opening?.resolution || this.props.venue.resolution;

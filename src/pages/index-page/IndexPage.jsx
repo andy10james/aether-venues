@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {venueService} from "../../services/venues/venueService";
+import {venueService} from "../../services/venueService";
 import {Modal} from "../../components/modal/Modal";
 import {VenueProfile} from "../../components/venue-profile/VenueProfile";
 import {VenueDirectory} from "../../components/venue-directory/VenueDirectory";

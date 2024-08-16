@@ -1,12 +1,7 @@
-import React, {useEffect, useState} from "react";
-import {VenueCollection} from "../venue-strip/VenueCollection";
-import {venueService} from "../../services/venues/venueService";
-import {favouritesService} from "../../services/favouritesService";
-import {timeService} from "../../services/timeService";
+import { VenueCollection } from "../venue-strip/VenueCollection";
+import {venueService} from "../../services/venueService";
 import React, {Profiler} from "react";
 import { useEffect, useState } from "react";
-import { VenueFiltersPanel } from "./VenueFiltersPanel";
-import { venueService } from "../../services/venueService";
 import { favouritesService } from "../../services/favouritesService";
 import { timeService } from "../../services/timeService";
 import { VenueStrip } from "../venue-strip/VenueStrip";
@@ -81,7 +76,6 @@ export function VenueDirectory(props) {
 
   if (error)
     return <>
-      {filterPanel}
       <div className="venue-directory__none-found">
         😱 We couldn't load the venues! {error.message}
       </div>
@@ -89,7 +83,6 @@ export function VenueDirectory(props) {
 
   if (!scheduledVenuesRender && isLoadedButNoResult(filteredUnscheduled))
     return <>
-      {filterPanel}
       <div className="venue-directory__none-found">
         😞 No results for that search or combination of tags.
       </div>
@@ -142,10 +135,7 @@ export function VenueDirectory(props) {
         <div className="aether-venues__venues aether-venues__future-venues">
           <details open>
             <summary><h2>Future openings</h2></summary>
-            { listView
-              ? <VenueList venues={filteredFuture} />
-              : <VenueStrip venues={filteredFuture} />
-            }
+            <VenueStrip venues={filteredFuture} />
           </details>
         </div>
       </Profiler>}
