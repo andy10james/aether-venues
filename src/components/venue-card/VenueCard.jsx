@@ -1,6 +1,6 @@
 import React from "react";
 import "./venue-card.css";
-import { Modal } from "../modal/Modal";
+import { Modal } from "../modal-stage/Modal";
 import { favouritesService } from "../../services/favouritesService";
 import { visitedService } from "../../services/visitedService";
 import { VenueProfile } from "../venue-profile/VenueProfile";
@@ -8,6 +8,7 @@ import { VenueListing } from "../venue-listing/VenueListing";
 import defaultImage from "./default-banner.jpg";
 import {DateString} from "../date-string/DateString";
 import {TimeString} from "../time-string/TimeString";
+import {ModalCloseButton} from "../modal-stage/ModalCloseButton";
 
 class VenueCard extends VenueListing {
 
@@ -17,7 +18,8 @@ class VenueCard extends VenueListing {
         classes.push("venue-card__container");
         if (this.props.className) classes.push(this.props.className);
         if (this.props.venue.isNew()) classes.push("venue-card__container--new");
-        if (this.props.venue.open) classes.push("venue-card__container--open");
+        if (this.props.venue.resolution?.isNow) classes.push("venue-card__container--open");
+        if (!this.props.venue.resolution) classes.push("venue-card__container--no-time"); // make sure to update `venue-card-no-time` css class to this
         if (favouritesService.isFavourite(this.props.venue.id))
             classes.push("venue-card__container--favorite");
         if (visitedService.isVisited(this.props.venue.id))
@@ -57,7 +59,7 @@ class VenueCard extends VenueListing {
             </div>
             { this.state.openModal &&
                 <Modal className="venue-modal" onStageClick={this._onCloseClick.bind(this)}>
-                    <button className="venue-modal__close-button" onClick={this._onCloseClick.bind(this)}><img src="assets/cross.svg" alt="" /></button>
+                    <ModalCloseButton onClick={this._onCloseClick.bind(this)} />
                     <VenueProfile venue={this.props.venue} />
                 </Modal>
             }
