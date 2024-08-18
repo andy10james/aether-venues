@@ -132,11 +132,9 @@ export function VenueDirectory(props) {
     { /* Future venues */ }
     { isLoadingOrLoadedWithResults(filteredFuture) &&
       <Profiler id="venue-directory__future" onRender={(id, phase, duration) => console.log(`${id} rendered (${phase}) in ${duration}ms.`)}>
-        <div className="aether-venues__venues aether-venues__future-venues">
-          <details open>
-            <summary><h2>Future openings</h2></summary>
-            <VenueStrip venues={filteredFuture} />
-          </details>
+        <div className="venue-directory__list-section venue-directory__list-section-future-venues">
+          <h2>Future openings</h2>
+          <VenueStrip venues={filteredFuture} />
         </div>
       </Profiler>}
 

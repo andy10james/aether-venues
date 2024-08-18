@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Modal} from "../modal/Modal";
+import React, {useRef, useState} from "react";
+import {Modal} from "../modal-stage/Modal";
 import {NewVenueGuidance} from "../new-venue-guidance/NewVenueGuidance";
 import {FilterMenu} from "../filter-menu/FilterMenu";
 import {TextBox} from "../textbox/textbox";
@@ -12,9 +12,31 @@ import searchIcon from "../../assets/icons/search-icon.svg";
 import logo from "../../assets/logos/logo.svg";
 import tempAvatar from "./assets/avatar.jpg";
 import "./index-menu.css";
+import {ModalCloseButton} from "../modal-stage/ModalCloseButton";
 
 export const IndexMenu = (props) => {
-  const [showNewVenueModal, setShowNewVenueModal] = useState(false)
+  const [ showNewVenueModal, setShowNewVenueModal ] = useState(false);
+
+  const [ searchValue, setSearchValue ] = useRef("");
+  const [ regionFilter, setRegionFilter ] = useRef(v => true);
+
+  const triggerFilterEvent = () => {
+    const newFilterFunc = v =>
+      v.name.indexOf(searchValue) > -1
+          && regionFilter(v);
+    props.onFilter(newFilterFunc)
+  }
+
+  const onSearchChange = (event) => {
+    setSearchValue(event.target.value);
+    triggerFilterEvent();
+  }
+
+  const onWorldSelectionChange = (filterData) => {
+    setRegionFilter(filterData.resultantFilter);
+    triggerFilterEvent();
+  };
+
 
   return (
     <div className={"index-menu__container " + props.className}>
@@ -37,19 +59,20 @@ export const IndexMenu = (props) => {
       </div>
 
       <div className="index-menu__search-container">
-        <TextBox className="index-menu__search" icon={searchIcon} label="Search venues" />
+        <TextBox className="index-menu__search" icon={searchIcon} label="Search venues" onChange={onSearchChange} />
       </div>
 
-      <FilterMenu heading={{
-        name: "All regions",
-        icon: globeIcon
-      }} options={worldFilters} />
+      <FilterMenu
+        heading={{
+          name: "All regions",
+          icon: globeIcon
+        }}
+        options={worldFilters}
+        onFilter={onWorldSelectionChange} />
 
       { showNewVenueModal &&
         <Modal className="new-venue-modal" onStageClick={_ => setShowNewVenueModal(false) }>
-          <button className="venue-modal__close-button" onClick={_ => setShowNewVenueModal(false) }>
-            <img src={crossIcon} alt="" />
-          </button>
+          <ModalCloseButton onClick={_ => setShowNewVenueModal(false) } />
           <NewVenueGuidance />
         </Modal>
       }

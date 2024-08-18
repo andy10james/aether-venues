@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {venueService} from "../../services/venueService";
-import {Modal} from "../../components/modal/Modal";
+import {Modal} from "../../components/modal-stage/Modal";
 import {VenueProfile} from "../../components/venue-profile/VenueProfile";
 import {VenueDirectory} from "../../components/venue-directory/VenueDirectory";
 import {IndexMenu} from "../../components/index-menu/IndexMenu";

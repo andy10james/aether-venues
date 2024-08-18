@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import leftArrow from "../../assets/icons/left-arrow.svg";
-import rightArrow from "../../assets/icons/right-arrow.svg";
+import leftArrow from "./left-arrow.svg";
+import rightArrow from "./right-arrow.svg";
 
 export function FilterMenu(props) {
   const [clear, setHeaderSelected] = useState(false);
@@ -8,10 +8,15 @@ export function FilterMenu(props) {
   const [activeOptions, setActiveOptions] = useState([]);
   const [activeStack, setActiveStack ] = useState(props.activeStack || -1);
 
-  const key = props.stackKey === undefined ? 0 : props.stackKey;
+  const key = props._stackKey === undefined ? 0 : props._stackKey;
+  const listComprehensionFunction = props.mode === "and" ? "every" : "some";
 
-  const style = { //todo move this to stylesheet
-
+  const style = {
+    margin: 0,
+    listStyle: "none",
+    paddingLeft: 0,
+    width: "100%",
+    overflow: 'hidden',
     ...props.style,
     active: {
       borderTopColor: "#E480FE",
@@ -41,12 +46,14 @@ export function FilterMenu(props) {
       leftIcon: {
         paddingTop: 6,
         paddingBottom: 6,
+        cursor: 'pointer',
         width: 30,
         height: 16,
         textAlign: "right",
         ...props.style?.leftIcon
       },
       label: {
+        cursor: 'pointer',
         paddingTop: 6,
         paddingBottom: 6,
         paddingLeft: 6,
@@ -59,6 +66,7 @@ export function FilterMenu(props) {
         width: 30,
         textAlign: "left",
         height: 16,
+        cursor: 'pointer',
         ...props.style?.rightIcon
       }
     },
@@ -74,15 +82,18 @@ export function FilterMenu(props) {
 
   const onActivate = (o, i) => {
     let newActive = [ ...activeOptions ];
-    newActive[i] = activeOptions[i] === undefined ? o.filter : undefined;
+    newActive[i] = activeOptions[i] === undefined ? o : undefined;
     setActiveOptions(newActive);
-    const activeFilters = newActive.filter(f => f !== undefined);
+    const selectedOptions = newActive.filter(f => f !== undefined);
     if (props.onFilter)
       props.onFilter({
         stackKey: key,
-        filters: activeFilters,
+        selectedOptions: selectedOptions,
+        resultantFilter: item =>
+          selectedOptions.length === 0 ||
+            selectedOptions.map(o => o.filter)[listComprehensionFunction](f => f(item))
       });
-    if (activeFilters.length > 0)
+    if (selectedOptions.length > 0)
       setActiveStack(key);
     setHeaderSelected(false);
   };
@@ -99,42 +110,42 @@ export function FilterMenu(props) {
       setActiveOptions([]);
       setActiveStack(props.activeStack);
     }
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [ props.activeStack ]);
 
   return (
-      <ul style={style} className="filter-menu__container">
-        {
-          props.heading &&
-          <li style={style.li}>
-            <div style={clear ? { ...style.itemControls, ...style.active} : style.itemControls}>
-              <div style={style.itemControls.leftIcon}>{ props.heading.icon && <img src={ props.heading.icon } alt="" /> }</div>
-              <span className="name" style={style.itemControls.label} onClick={() => onClear()}>{props.heading.name}</span>
-              <div style={style.itemControls.rightIcon}></div>
-            </div>
-          </li>
-        }
-        {props.options.map((option, i) => {
-          if (open !== -1 && open !== i) // todo set clear key into own render/ outside map?
-            return null;
+    <ul style={style}>
+      {
+        props.heading &&
+        <li style={style.li}>
+          <div style={clear ? { ...style.itemControls, ...style.active} : style.itemControls}>
+            <div style={style.itemControls.leftIcon}>{ props.heading.icon && <img src={ props.heading.icon } alt="" /> }</div>
+            <span className="name" style={style.itemControls.label} onClick={() => onClear()}>{props.heading.name}</span>
+            <div style={style.itemControls.rightIcon}></div>
+          </div>
+        </li>
+      }
+      {props.options.map((option, i) => {
+        if (open !== -1 && open !== i) // todo set clear key into own render/ outside map?
+          return null;
 
-          return <li key={option.name} style={style.li}>
-            <div style={activeOptions[i] === undefined ? style.itemControls : { ...style.itemControls, ...style.active}}>
-              <div style={style.itemControls.leftIcon}>{open === i && <img src={leftArrow} alt="Navigate Out Icon" onClick={() => setOpen(-1)}/>}</div>
-              <span className="name" style={style.itemControls.label} onClick={() => onActivate(option, i)}>{option.name}</span>
-              <div style={style.itemControls.rightIcon}>{open !== i && option.options && <img src={rightArrow} alt="Navigate In Icon" onClick={() => setOpen(i)}/>}</div>
-            </div>
-            {option.options &&
-              <FilterMenu
-                stackKey={key + "." + i}
-                style={open !== i ? {...props.style, display: 'none'} : props.style}
-                options={option.options}
-                onFilter={onChildActivate}
-                activeStack={activeStack}
-              />
-            }
-          </li>
-        })}
-      </ul>
+        return <li key={option.name} style={style.li}>
+          <div style={activeOptions[i] === undefined ? style.itemControls : { ...style.itemControls, ...style.active}}>
+            <div style={style.itemControls.leftIcon}>{open === i && <img src={leftArrow} alt="Navigate Out Icon" onClick={() => setOpen(-1)}/>}</div>
+            <span className="name" style={style.itemControls.label} onClick={() => onActivate(option, i)}>{option.name}</span>
+            <div style={style.itemControls.rightIcon}>{open !== i && option.options && <img src={rightArrow} alt="Navigate In Icon" onClick={() => setOpen(i)}/>}</div>
+          </div>
+          {option.options &&
+            <FilterMenu
+              _stackKey={key + "." + i}
+              style={open !== i ? {...props.style, display: 'none'} : props.style}
+              options={option.options}
+              onFilter={onChildActivate}
+              activeStack={activeStack}
+            />
+          }
+        </li>
+      })}
+    </ul>
   );
 }

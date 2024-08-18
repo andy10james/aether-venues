@@ -1,6 +1,6 @@
 import "./venue-collection.css";
 import { VenueCard } from "../venue-card/VenueCard";
-import { HorizontalScroll } from "../horizontal-scroll/HorizontalScroll"
+// import { HorizontalScroll } from "../horizontal-scroll/HorizontalScroll"
 import { Loading } from "../loading/Loading";
 
 export function VenueCollection(props) {
